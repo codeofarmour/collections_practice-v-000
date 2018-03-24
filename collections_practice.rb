@@ -1,83 +1,72 @@
-def organize_schools(schools)
-  organized_schools = {}
-  schools.each do |name, location_hash|
-    location = location_hash[:location]
-    if organized_schools[location]
-      organized_schools[location] << name
+require 'pry'
+
+def sort_array_asc(array)
+  array.sort
+end
+
+def sort_array_desc(array)
+  array.sort do | left, right|
+    right <=> left
+  end
+end
+
+def sort_array_char_count(array)
+  array.sort do |left, right|
+    left.length <=> right.length
+  end
+end
+
+def swap_elements(array)
+  array[1], array[2] = array[2], array[1]
+  array
+end
+
+def reverse_array(array)
+  array.reverse
+end
+
+def kesha_maker(array)
+  array.each do |item|
+    item[2] = "$"
+  end
+end
+
+def find_a(array)
+  array.find_all do |word|
+    word[0] == "a"
+  end
+
+  # using select method
+    # array.select do |word|
+    #   word[0] == "a"
+    # end
+end
+
+def sum_array(array)
+  sum = 0
+  array.each do |num|
+    sum+=num
+  end
+  sum
+
+  # using reduce method
+    # array.reduce(:+)
+
+  # using inject method (short)
+     # array.inject(:+)
+
+  # using inject method (long)
+     # array.inject do |sum,x|
+     #  sum + x
+     # end
+end
+
+def add_s(array)
+  array.collect do |word|
+    if array[1] == word
+      word
     else
-      organized_schools[location] = []
-      organized_schools[location] << name
+      word + "s"
     end
   end
-  organized_schools
-end
-
-def begins_with_r(array)
-  flag = true
-  array.each do |element|
-    flag = false if element[0] != "r"
-  end
-  flag
-end
-
-def contain_a(array)
-  container = []
-  array.each do |element|
-    container << element if element.include?("a")
-  end
-  container
-end
-
-def remove_non_strings(array)
-  container = []
-  array.each do |element|
-    container << element if element.is_a?(String)
-  end
-  container
-end
-
-def first_wa(array)
-  first_wa = nil
-  array.each do |element|
-    if element.match(/wa/)
-      first_wa = element
-      break
-    end
-  end
-  first_wa
-end
-
-def find_cool(array)
-  container = []
-  array.each do |element|
-    container << element if element[:temperature] == "cool"
-  end
-  container
-end
-
-def count_elements(array)
-  array.each do |original_hash|
-    original_hash[:count] = 0
-    name = original_hash[:name]
-    array.each do |hash|
-      if hash[:name] == name
-        original_hash[:count] += 1
-      end
-    end
-  end.uniq
-end
-
-def merge_data(keys, values)
-  container = []
-  keys.each do |person_name|
-    name = person_name[:first_name]
-    values.each do |person_data|
-      if person_data[name]
-        merged_person = person_data[name]
-        merged_person[:first_name] = name
-        container << merged_person
-      end
-    end
-  end
-  container
 end
